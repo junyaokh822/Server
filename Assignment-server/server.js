@@ -2,13 +2,11 @@ const express = require("express");
 const app = express();
 const port = 4000;
 
+app.use(express.json())
+
 app.get("/", (req, res) => {
   res.send("Welcome to the flight Application Tracker API!");
 });
-
-
-
-
 
 // List all flight
 app.get("/flights", (req, res) => {
@@ -29,12 +27,14 @@ app.get("/flights/:id", (req, res) => {
 // Create a new flight
 app.post("/flights", (req, res) => {
   const newFlight = req.body;
-  jobs.push(newFlight);
+  console.log();
+  flights.push(newFlight);
   res.status(201).send(newFlight);
 });
 
 // Update a specific flight
 app.patch("/flights/:id", (req, res) => {
+  console.log(req.body)
   const flightId = parseInt(req.params.id, 10);
   const flightUpdates = req.body;
   const flightIndex = flights.findIndex((flight) => flight.id === flightId);
@@ -59,17 +59,9 @@ app.delete("/flights/:id", (req, res) => {
   }
 });
 
-
-
-
-
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
-
-
-
-
 
 const flights = [
 {
